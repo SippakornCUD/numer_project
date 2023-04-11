@@ -29,3 +29,21 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+    - name: installFrontend
+      run: |
+        cd backend
+        npm install
+    - name: installBackend
+      run: |
+        cd project
+        npm install
+    - name: Ci_Backend
+      run: |
+        cd backend
+        npm test
+    - name: Ci_Frontend
+      run: |
+        cd project
+        npm test
+    - name: test docker
+      run: docker-compose build
