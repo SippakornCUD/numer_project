@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Folk_password1311
+      MYSQL_DATABASE: numer_project_veryfun
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3310:3306"
+
+  server:
+    build: ./backend/
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: Folk_password1311
+      DB_NAME: numer
+      DB_PORT: 3306
+
+  app:
+    build: ./project/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
