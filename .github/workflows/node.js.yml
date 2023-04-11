@@ -28,19 +28,19 @@ jobs:
 
     - name: installFrontend
       run: |
-        cd backend
+        cd project
         npm install
     - name: installBackend
       run: |
-        cd project
+        cd backend
         npm install
-    - name: Ci_Backend
+    - name: Ci_frontend
+      run: |
+        cd project
+        npm test
+    - name: Ci_backend
       run: |
         cd backend
         npm test
-    - name: Ci_Frontend
-      run: |
-        cd project
-        npm test
-    - name: test docker
+    - name: docker test
       run: docker-compose build
